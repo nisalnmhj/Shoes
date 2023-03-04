@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+ 
+ backend:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: library_mern_nginx
+    volumes:
+      - /app/node_modules
+      - ./backend:/app
+  
+    depends_on:
+      - mongodb
+
+    networks:
+      - library-mern-api
+ mongodb:
+   image: mongo:latest
+   restart: always
+   ports:
+    - 27017:27017
+   environment:
+    MONGO_INITDB_ROOT_USERNAME: user
+    MONGO_INITDB_ROOT_PASSWORD: pass
+   volumes:
+    - mongodb-data:/data/db
+   networks: 
+    - library-mern-api
+networks:
+  library-mern-api:
+    driver: bridge
+
+volumes:
+  mongodb-data:
+    driver: local
+
