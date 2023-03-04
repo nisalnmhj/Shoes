@@ -37,7 +37,18 @@ app.get("/", (req, res) => {
  * POST: /purchase
  * 
  */
+app.get("/user",(req,res)=>{
+  res.send("This is User GET METHOD");
+})
 
+
+app.post("/register",(req,res)=>{
+
+  //some information provided by request
+
+  res.send("This is Register Post method");
+
+})
 
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}!`);
