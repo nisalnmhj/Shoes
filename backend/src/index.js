@@ -50,6 +50,28 @@ app.post("/register",(req,res)=>{
 
 })
 
+app.post("/login", (req,res)=>{
+  res.send("you have to log in");
+})
+
+app.get("/products",(req,res)=>{
+  res.send("This is User product");
+})
+
+app.post("/product/{id}",(req,res)=>{
+  res.send("This is User product id");
+})
+
+app.delete("/product",(req,res)=>{
+  res.send("This is User product");
+})
+
+app.post("/purchase",(req,res)=>{
+res.send("This is the item you purchases.");
+})
+
+
+
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}!`);
 });
