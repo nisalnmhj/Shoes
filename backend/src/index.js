@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const User = require("../src/models/UserModel");
 const app = express();
 const PORT = 3000;
 
@@ -9,7 +10,7 @@ const PORT = 3000;
 const MONGO_PORT = process.env.MONGO_PORT || 27017;
 const MONGO_USER = process.env.MONGO_USER || 'user';
 const MONGO_PASS = process.env.MONGO_PASS || 'pass';
-const mongoURI = `mongodb://localhost:${MONGO_PORT}/collection`;
+const mongoURI = `mongodb://127.0.0.1:${MONGO_PORT}/collection`;
 const mongoOptions = {
     user: MONGO_USER,
     pass: MONGO_PASS
@@ -42,11 +43,20 @@ app.get("/user",(req,res)=>{
 })
 
 
-app.post("/register",(req,res)=>{
+app.post("/register",async (req,res)=>{
 
   //some information provided by request
-
-  res.send("This is Register Post method");
+  const user = req.body;
+  
+  const newUser = new User(user);
+  try{
+  newUser.save();
+  res.status(500).json(newUser);
+  }
+  catch(error){
+    res.status(500).json({"This is error"});
+  }
+  res.status(201).send("This is Register Post method");
 
 })
 
@@ -58,7 +68,7 @@ app.get("/products",(req,res)=>{
   res.send("This is User product");
 })
 
-app.post("/product/{id}",(req,res)=>{
+app.get("/product/{id}",(req,res)=>{
   res.send("This is User product id");
 })
 
