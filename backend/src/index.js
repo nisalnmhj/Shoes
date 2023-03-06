@@ -47,14 +47,17 @@ app.post("/register",async (req,res)=>{
 
   //some information provided by request
   const user = req.body;
-  
   const newUser = new User(user);
   try{
   newUser.save();
-  res.status(500).json(newUser);
+  res.status(201).json(newUser);
   }
   catch(error){
-    res.status(500).json({"This is error"});
+    res.status(500).json(
+      {
+        message:error.reigster
+      }
+    );
   }
   res.status(201).send("This is Register Post method");
 
