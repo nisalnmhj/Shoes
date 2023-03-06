@@ -4,12 +4,27 @@ const { Schema } = mongoose;
 
 const ProductSchema = new Schema({
  
-    name : { type: String},
-    description: {type: String},
-    size:{type:String},
-    price:{type:Number},
-    rating:{type:Number},
-    stock:{type:Number}
+    name : { 
+        type: String,
+        required: true
+    },
+    description: {
+        type: String
+    },
+    size:{
+        type:String
+    },
+    price:{
+        type:Number,
+        required:true
+    },
+    rating:{
+        type:Number
+    },
+    stock:{
+        type:Number,
+        required: true,
+    }
 });
 
 module.exports = mongoose.model("Product",ProductSchema);
