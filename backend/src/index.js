@@ -48,7 +48,7 @@ app.post("/register",async (req,res)=>{
   const user = req.body;
   const newUser = new User(user);
   try{
-  newUser.save();
+  await newUser.save();
   res.status(201).json(newUser);
   }
   catch(error){
@@ -61,23 +61,35 @@ app.post("/register",async (req,res)=>{
   
 })
 
-app.post("/login", (req,res)=>{
+app.post("/login",async (req,res)=>{
   res.send("you have to log in");
 })
 
-app.get("/products",(req,res)=>{
-  res.send("This is User product");
+app.get("/products",async(req,res)=>{
+  const products = req.body;
+  const newProduct = new Product(products);
+  try{
+    await newProduct.save();
+    res.status(201).json(newProduct);
+  }
+  catch(error){
+    res.status.json(
+      {
+        "Products error": error.message
+      }
+    );
+  }
 })
 
-app.get("/product/{id}",(req,res)=>{
+app.get("/product/{id}",async(req,res)=>{
   res.send("This is User product id");
 })
 
-app.delete("/product",(req,res)=>{
+app.delete("/product",async(req,res)=>{
   res.send("This is User product");
 })
 
-app.post("/purchase",(req,res)=>{
+app.post("/purchase",async(req,res)=>{
 res.send("This is the item you purchases.");
 })
 
