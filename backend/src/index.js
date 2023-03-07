@@ -44,7 +44,6 @@ app.get("/user",(req,res)=>{
 
 
 app.post("/register",async (req,res)=>{
-
   //some information provided by request
   const user = req.body;
   const newUser = new User(user);
@@ -55,12 +54,11 @@ app.post("/register",async (req,res)=>{
   catch(error){
     res.status(500).json(
       {
-        message:error.reigster
+        "Error":error.message
       }
     );
   }
-  res.status(201).send("This is Register Post method");
-
+  
 })
 
 app.post("/login", (req,res)=>{
