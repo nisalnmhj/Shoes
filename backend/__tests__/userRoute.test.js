@@ -35,21 +35,56 @@ describe("POST REQUEST: ADDING A NEW USER to database",()=>{
             const result = await request(url)
                                         .post("/register")
                                         .send({});
-            expect(true).toBe(true);
-            // expect(result.statusCode).toBe(500);
+            
+            expect(result.statusCode).toBe(500);
         });
 
         it("Incomplete body should fail with 500 status code:", async()=>{
             const result = await request(url)
                                     .post("/register")
                                     .send({username:"Rojan"});
-            expect(true).toBe(true);
-            // expect(result.statusCode).toBe(500);
+            expect(result.statusCode).toBe(500);
         });
 
      })
 
+     describe("Given a proper body: ",()=>{
+
+        describe("Given a Username that is unique", ()=>{
+                
+        });
+
+        describe("Given a USername that already exists",()=>{
+
+        });
+
+     });
 
 
 }
 );
+
+// GET Request
+describe("Getting User: ", ()=>{
+    describe("Given the User Id doesnot exist /user/123 :",()=>{
+        it("Should return 204-No content",async()=>{
+            const id = 12345;
+            const result = await request(url)
+                                        .get(`/user/${id}`);
+            expect(result.statusCode).toBe(204);
+            // expect body to be empty
+        });
+    });
+
+    describe("Given the User Id exists /user/1234 :",()=>{
+        it("Should return 200-OK",async ()=>{
+            const id = 123456;
+
+            const result = await request(url)
+                                        .get(`/user/${id}`);
+            expect(result.statusCode).toBe(200);
+            //expect body to match
+
+        });
+    });
+});

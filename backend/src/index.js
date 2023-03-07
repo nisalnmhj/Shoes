@@ -27,19 +27,17 @@ app.get("/", (req, res) => {
 });
 
 
-/**
- * Routes we need
- * POST: /register
- * POST: /login
- * GET: /products
- * GET: /product/{id}
- * POST: /product
- * DELETE: /product
- * POST: /purchase
- * 
- */
-app.get("/user",(req,res)=>{
-  res.send("This is User GET METHOD");
+app.get("/users",async (req,res)=>{
+  try{
+      const users = await User.find({});
+      res.status(201).send(users);
+  }
+  catch (e){
+      res.status(500).send({
+        "Error":e.message,
+      });
+  }
+  
 })
 
 
@@ -60,6 +58,7 @@ app.post("/register",async (req,res)=>{
   }
   
 })
+
 
 app.post("/login",async (req,res)=>{
   res.send("you have to log in");
