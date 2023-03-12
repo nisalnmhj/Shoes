@@ -6,7 +6,7 @@ function connectDatabase(){
     const MONGO_PORT = process.env.MONGO_PORT || 27017;
     const MONGO_USER = process.env.MONGO_USER || 'user';
     const MONGO_PASS = process.env.MONGO_PASS || 'pass';
-    const mongoURI = `mongodb://localhost:${MONGO_PORT}/collection`;
+    const mongoURI = `mongodb://mongodb:${MONGO_PORT}/collection`;
     const mongoOptions = {
     user: MONGO_USER,
     pass: MONGO_PASS

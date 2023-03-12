@@ -1,11 +1,11 @@
 FROM node:16
 # Create app directory
-ENV MONGO_PORT=8080
+ENV PORT=8080
 ENV MONGO_USER=user
 ENV MONGO_PASS=pass
 WORKDIR /app
 ## Install all dependencies from package.json and package-lock.json
-COPY package*.json ./
+COPY package*.json .
 RUN npm install
 #Bundle app Source
 COPY . .
